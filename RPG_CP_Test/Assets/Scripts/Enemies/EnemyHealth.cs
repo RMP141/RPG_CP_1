@@ -1,4 +1,4 @@
-using UnityEngine;
+п»їusing UnityEngine;
 using System;
 using RPG.Core;
 using RPG.DI;
@@ -47,16 +47,16 @@ namespace RPG.Enemies
             currentHealth -= damage;
             OnHealthChanged?.Invoke(currentHealth, maxHealth);
 
-            // Визуальный эффект получения урона
+            // Р’РёР·СѓР°Р»СЊРЅС‹Р№ СЌС„С„РµРєС‚ РїРѕР»СѓС‡РµРЅРёСЏ СѓСЂРѕРЅР°
             StartCoroutine(DamageFlash());
 
-            // Эффект попадания
+            // Р­С„С„РµРєС‚ РїРѕРїР°РґР°РЅРёСЏ
             if (hitEffect != null)
             {
                 Instantiate(hitEffect, transform.position + Vector3.up, Quaternion.identity);
             }
 
-            // Воспроизводим звук
+            // Р’РѕСЃРїСЂРѕРёР·РІРѕРґРёРј Р·РІСѓРє
             var audioManager = DIContainer.Instance.Resolve<IAudioManager>();
             audioManager?.PlaySFX("EnemyHit");
 
@@ -80,13 +80,13 @@ namespace RPG.Enemies
         {
             isDead = true;
 
-            // Эффект смерти
+            // Р­С„С„РµРєС‚ СЃРјРµСЂС‚Рё
             if (deathEffect != null)
             {
                 Instantiate(deathEffect, transform.position, Quaternion.identity);
             }
 
-            // Уведомляем о смерти
+            // РЈРІРµРґРѕРјР»СЏРµРј Рѕ СЃРјРµСЂС‚Рё
             OnDeath?.Invoke();
         }
 

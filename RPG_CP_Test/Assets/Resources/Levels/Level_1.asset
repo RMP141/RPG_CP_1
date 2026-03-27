@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f34ad5ac5aa78e409a13cfd3c1d106b, type: 3}
+  m_Name: Level_1
+  m_EditorClassIdentifier: Assembly-CSharp::RPG.Level.LevelData
+  levelIndex: 1
+  levelName: Forest
+  levelPrefab: {fileID: 6479972820024757460, guid: 2a7e40726f317324fa15717fed398e35, type: 3}
+  skyboxMaterial: {fileID: 0}
+  playerStartPosition: {x: 0, y: 1, z: 0}
+  playerStartRotation: {x: 0, y: 0, z: 0}
+  enemies:
+  - enemyPrefab: {fileID: 6706834086678013775, guid: 380b0b38cec6fb94b8e8563db758a5a7, type: 3}
+    position: {x: 8, y: 0, z: -2}
+    rotation: {x: 0, y: 0, z: 0}
+    count: 1
+    spawnRadius: 0
+  - enemyPrefab: {fileID: 6706834086678013775, guid: 380b0b38cec6fb94b8e8563db758a5a7, type: 3}
+    position: {x: 6, y: 0, z: 1}
+    rotation: {x: 0, y: 0, z: 0}
+    count: 2
+    spawnRadius: 0
+  items:
+  - itemPrefab: {fileID: 8429181408397038998, guid: 0728b6afc62bed144bbe904a74064034, type: 3}
+    position: {x: 5, y: 0.5, z: 2}
+    quantity: 0
+  - itemPrefab: {fileID: 5787428978104254720, guid: 12f385c70b0be174eae0e9d625ea50d8, type: 3}
+    position: {x: 6, y: 0.5, z: 10}
+    quantity: 5
+  quests:
+  - id: 1
+    name: Defeat Goblins
+    description: 
+    type: 0
+    requiredAmount: 3
+    reward:
+      experience: 1
+      gold: 1
+      itemRewardId: 
+  - id: 2
+    name: Collect Coins
+    description: 
+    type: 1
+    requiredAmount: 3
+    reward:
+      experience: 1
+      gold: 1
+      itemRewardId: 
+  sunLight: {fileID: 0}
+  fogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  fogDensity: 0.02

@@ -67,6 +67,18 @@ namespace RPG.Items
             return true;
         }
 
+        public void ClearInventory()
+        {
+            items.Clear();
+            OnInventoryChanged?.Invoke(items);
+            Debug.Log("Inventory cleared");
+        }
+
+        public Dictionary<string, int> GetAllItems()
+        {
+            return new Dictionary<string, int>(items);
+        }
+
         public bool HasItem(string itemId, int amount = 1)
         {
             return items.ContainsKey(itemId) && items[itemId] >= amount;

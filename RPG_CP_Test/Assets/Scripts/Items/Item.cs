@@ -1,6 +1,8 @@
-using RPG.Player;
-using UnityEngine;
 using RPG.Core;
+using RPG.DI;
+using RPG.Player;
+using RPG.Quests;
+using UnityEngine;
 
 namespace RPG.Items
 {
@@ -25,19 +27,36 @@ namespace RPG.Items
 
         public void Collect()
         {
-            var player = GameObject.FindGameObjectWithTag("Player");
-            var stats = player?.GetComponent<PlayerStats>();
-            var inventory = Inventory.Instance;
+            Debug.Log($"Collecting item: {itemName} (Type: {type}, Value: {value})");
+
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            PlayerStats stats = player?.GetComponent<PlayerStats>();
+            Inventory inventory = Inventory.Instance;
+
+            // Получаем менеджер квестов через DI
+            IQuestManager questManager = DIContainer.Instance.Resolve<IQuestManager>();
 
             switch (type)
             {
                 case ItemType.Consumable:
-                    if (healAmount > 0) stats?.Heal(healAmount);
-                    if (manaAmount > 0) stats?.RestoreMana(manaAmount);
+                    if (healAmount > 0)
+                    {
+                        stats?.Heal(healAmount);
+                        Debug.Log($"Healed for {healAmount}");
+                    }
+                    if (manaAmount > 0)
+                    {
+                        stats?.RestoreMana(manaAmount);
+                        Debug.Log($"Restored mana for {manaAmount}");
+                    }
                     break;
 
                 case ItemType.Currency:
-                    inventory?.AddGold(value);
+                    if (inventory != null)
+                    {
+                        inventory.AddGold(value);
+                        Debug.Log($"Added {value} gold! Total: {inventory.Gold}");
+                    }
                     break;
 
                 default:
@@ -45,9 +64,23 @@ namespace RPG.Items
                     break;
             }
 
-            if (pickupEffect != null)
-                Instantiate(pickupEffect, transform.position, Quaternion.identity);
+            if (questManager != null)
+            {
+                questManager.UpdateQuest(QuestType.Collect, 1);
+                Debug.Log($"Quest updated: Collect +1");
+            }
+            else
+            {
+                Debug.LogError("QuestManager is null!");
+            }
 
+            // Эффект подбора
+            if (pickupEffect != null)
+            {
+                Instantiate(pickupEffect, transform.position, Quaternion.identity);
+            }
+
+            // Уничтожаем предмет
             Destroy(gameObject);
         }
     }

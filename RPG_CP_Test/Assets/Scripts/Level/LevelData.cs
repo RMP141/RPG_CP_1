@@ -36,7 +36,7 @@ namespace RPG.Level
     {
         public GameObject itemPrefab;
         public Vector3 position;
-        public int quantity = 1;
+        public int quantity = 5;
     }
 
     [System.Serializable]
